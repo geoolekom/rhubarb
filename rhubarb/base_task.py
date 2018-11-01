@@ -1,13 +1,13 @@
 from jsonschema import validate
 
-from rhubarb.storage import tasks
+from rhubarb.app import registered_tasks
 
 
 class BaseTaskMetaclass(type):
     def __new__(cls, *args, **kwargs):
         instance = super().__new__(cls, *args, **kwargs)
         if instance.name:
-            tasks[instance.name] = instance()
+            registered_tasks[instance.name] = instance()
         return instance
 
 

@@ -1,6 +1,6 @@
 from jsonschema import validate
 
-from rhubarb.storage import tasks
+from rhubarb.app import registered_tasks
 
 
 def task(name, json_schema=None):
@@ -9,6 +9,6 @@ def task(name, json_schema=None):
             if json_schema:
                 validate(kwargs, json_schema)
             return func(**kwargs)
-        tasks[name] = inner
+        registered_tasks[name] = inner
         return inner
     return decorator
