@@ -10,12 +10,9 @@ parser.add_argument('--params', type=str, default='{}')
 
 def run_cli():
     app = DefaultApp()
-    print('Зарегистрированные задачи:')
-    for name in registered_tasks:
-        print(f'- {name}')
     args = parser.parse_args()
     params = json.loads(args.params)
-    app.task_queue.put(args.task_name, params)
+    app.queue_task(args.task_name, params)
 
     app.run()
 
